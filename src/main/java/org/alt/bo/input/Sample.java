@@ -2,6 +2,8 @@ package org.alt.bo.input;
 
 import lombok.*;
 
+import java.time.LocalTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -13,6 +15,6 @@ public class Sample {
     private Type type;
     private Priority priority;
     private Integer analysisTime;   // duration in minutes
-    private String arrivalTime;
+    private LocalTime arrivalTime;
     private String patientId;
 }
