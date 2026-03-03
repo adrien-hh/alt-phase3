@@ -18,10 +18,8 @@ mvn install
 ### Exécuter le code refactoré
 
 ```bash
-mvn exec:java "-Dexec.mainClass=OrderReportApp"
+# TODO
 ```
-
-> Remarque : le code refactoré doit lire les mêmes CSV dans `legacy/data/` et produire **exactement** le même texte que le legacy.
 
 ### Exécuter les tests
 
@@ -29,6 +27,17 @@ mvn exec:java "-Dexec.mainClass=OrderReportApp"
 mvn test
 ```
 
+### Exécuter le linting
+
+Spotless utilise les règles google-java-format :
+
+```bash
+# Check for format violations
+mvn spotless:check
+
+# Fix the detected violations 
+mvn spotless:apply
+```
 ### Validation non-régression (Golden Master)
 
 Le test Golden Master :
