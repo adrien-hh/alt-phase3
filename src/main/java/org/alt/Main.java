@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        LabInput input = JsonUtils.read("example1-input.json", LabInput.class);
+        LabInput input = JsonUtils.read("example2-input.json", LabInput.class);
 
         LabOutput output = new LabPlanner().planifyLab(input);
 

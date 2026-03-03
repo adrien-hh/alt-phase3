@@ -8,6 +8,8 @@ import org.alt.bo.input.Technician;
 import org.alt.bo.output.Metrics;
 import org.alt.bo.output.ScheduleEntry;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,19 +23,23 @@ public class LabPlanner {
         List<ScheduleEntry> schedule = new ArrayList<>();
         int conflicts = 0;
 
+        Technician technician = input.getTechnicians().getFirst();
+        Equipment equipment = input.getEquipments().getFirst();
+
+        if (technician == null || equipment == null) {
+            return new LabOutput(List.of(), new Metrics(0, 0.0, 1));
+        }
+
+        LocalTime techFreeAt = technician.getStartTime();
+        LocalTime equipFreeAt = LocalTime.MIN;
+
         for (Sample sample : samples) {
-
-            Technician technician = input.getTechnicians().getFirst();
-            Equipment equipment = input.getEquipments().getFirst();
-
-            if (technician == null || equipment == null) {
-                conflicts++;
-                continue;
-            }
 
             LocalTime start = maxStartTime(
                     sample.getArrivalTime(),
-                    technician.getStartTime()
+                    technician.getStartTime(),
+                    techFreeAt,
+                    equipFreeAt
             );
 
             LocalTime end = start.plusMinutes(sample.getAnalysisTime());
@@ -52,16 +58,33 @@ public class LabPlanner {
                     .priority(sample.getPriority())
                     .build()
             );
+
+            techFreeAt = end;
+            equipFreeAt = end;
         }
 
-        // 2) Metrics (cas 1)
-        // should get first and last schedule entry by time
-        long totalTime = schedule.isEmpty() ? 0
-                : minutesBetween(schedule.getFirst().getStartTime(), schedule.getLast().getEndTime());
+        LocalTime earliestArrival = input.getSamples().stream()
+                .map(Sample::getArrivalTime)
+                .min(LocalTime::compareTo)
+                .orElse(null);
+
+        LocalTime latestEnd = schedule.stream()
+                .map(ScheduleEntry::getEndTime)
+                .max(LocalTime::compareTo)
+                .orElse(null);
+
+        long totalTime = 0;
+        if (earliestArrival != null && latestEnd != null) {
+            totalTime = minutesBetween(earliestArrival, latestEnd);
+        }
 
         int totalAnalysis = input.getSamples().stream().mapToInt(Sample::getAnalysisTime).sum();
 
-        double efficiency = totalTime == 0 ? 0.0 : (100.0 * totalAnalysis / totalTime);
+        double efficiency = totalTime == 0
+                ? 0.0
+                : BigDecimal.valueOf(100.0 * totalAnalysis / totalTime)
+                .setScale(1, RoundingMode.HALF_UP)
+                .doubleValue();
 
         return new LabOutput(schedule, new Metrics(totalTime, efficiency, conflicts));
     }
@@ -78,10 +101,11 @@ public class LabPlanner {
         return samples;
     }
 
-    private LocalTime maxStartTime(LocalTime sampleArrival, LocalTime technicianStart) {
-        if(technicianStart.isAfter(sampleArrival)) {
-            return technicianStart;
+    private LocalTime maxStartTime(LocalTime... times) {
+        LocalTime max = times[0];
+        for (int i = 1; i < times.length; i++) {
+            if (times[i].isAfter(max)) max = times[i];
         }
-        return sampleArrival;
+        return max;
     }
 }
