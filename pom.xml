@@ -15,6 +15,7 @@
         <spotless.version>3.3.0</spotless.version>
         <googleJavaFormat.version>1.35.0</googleJavaFormat.version>
         <lombok.version>1.18.42</lombok.version>
+        <jackson.version>2.21.1</jackson.version>
     </properties>
 
     <dependencies>
@@ -23,6 +24,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 
