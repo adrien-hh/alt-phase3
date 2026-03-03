@@ -11,7 +11,7 @@ import lombok.*;
 public class Technician {
     private String id;
     private String name;
-    private Specialty specialty;
+    private Speciality speciality;
     private String startTime;
     private String endTime;
 }

@@ -1,6 +1,6 @@
 package org.alt.bo.input;
 
-public enum Specialty {
+public enum Speciality {
     BLOOD,
     URINE,
     TISSUE,
