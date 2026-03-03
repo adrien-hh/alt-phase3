@@ -15,10 +15,11 @@ mvn install
 
 ## Exécution
 
-### Exécuter le code refactoré
+### Exécuter le code
 
 ```bash
-# TODO
+# Input file must be in src/main/resources
+mvn exec:java "-Dexec.mainClass=org.alt.Main" "-Dexec.args=<input-file.json>"
 ```
 
 ### Exécuter les tests

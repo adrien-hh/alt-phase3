@@ -6,15 +6,25 @@ import org.alt.service.LabPlanner;
 import org.alt.utils.JsonUtils;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class Main {
+
+    private static final String OUTPUT_FILE = "planning.json";
+
     public static void main(String[] args) throws IOException {
 
-        LabInput input = JsonUtils.read("example2-input.json", LabInput.class);
+        if (args.length != 1) {
+            throw new IllegalArgumentException("Usage: <input.json>");
+        }
 
+        String inputFile = args[0];
+
+        LabInput input = JsonUtils.read(inputFile, LabInput.class);
         LabOutput output = new LabPlanner().planifyLab(input);
 
-        JsonUtils.mapper().writerWithDefaultPrettyPrinter()
-                .writeValue(System.out, output);
+        JsonUtils.mapper()
+                .writerWithDefaultPrettyPrinter()
+                .writeValue(Path.of(OUTPUT_FILE).toFile(), output);
     }
 }
