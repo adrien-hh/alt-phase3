@@ -9,7 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class Metrics {
-    private Integer totalTime; // total duration in minutes
-    private Double efficiency; // % = (sum of analysis durations) / (total planning time) * 100
-    private Integer conflicts;
+    private long totalTime; // total duration in minutes
+    private double efficiency; // % = (sum of analysis durations) / (total planning time) * 100
+    private int conflicts;
 }

@@ -12,5 +12,5 @@ public class Equipment {
     private String id;
     private String name;
     private Type type;
-    private Boolean available;
+    private boolean available;
 }
