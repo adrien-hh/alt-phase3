@@ -24,6 +24,11 @@ mvn install
 
 ## Utilisation
 
+### Exemple
+
+- Source : [full-input.json](./src/main/resources/full-input.json)  
+- Résultat : [planning.json](./planning.json)
+
 ### Exécuter le code
 
 ```bash
