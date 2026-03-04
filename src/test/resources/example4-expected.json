@@ -1,0 +1,35 @@
+{
+  "schedule": [
+    {
+      "sampleId": "S002",
+      "priority": "URGENT",
+      "technicianId": "TECH001",
+      "equipmentId": "EQ001",
+      "startTime": "09:15",
+      "endTime": "10:00",
+      "duration": 45,
+      "analysisType": "Numération complète",
+      "efficiency": 1.0
+    },
+    {
+      "sampleId": "S001",
+      "priority": "ROUTINE",
+      "technicianId": "TECH001",
+      "equipmentId": "EQ002",
+      "startTime": "10:00",
+      "endTime": "10:30",
+      "duration": 30,
+      "analysisType": "Bilan lipidique",
+      "efficiency": 1.0
+    }
+  ],
+  "metrics": {
+    "totalTime": 75,
+    "efficiency": 85.0,
+    "conflicts": 0,
+    "averageWaitTime": 22.5,
+    "technicianUtilization": 41.7,
+    "priorityRespectRate": 100,
+    "parallelEfficiency": 0
+  }
+}

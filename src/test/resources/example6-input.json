@@ -1,0 +1,46 @@
+{
+  "samples": [
+    {
+      "id": "S001",
+      "priority": "ROUTINE",
+      "type": "TISSUE",
+      "analysisTime": 60,
+      "arrivalTime": "11:30"
+    },
+    {
+      "id": "S002",
+      "priority": "URGENT",
+      "type": "BLOOD",
+      "analysisTime": 35,
+      "arrivalTime": "11:45"
+    },
+    {
+      "id": "S003",
+      "priority": "STAT",
+      "type": "BLOOD",
+      "analysisTime": 40,
+      "arrivalTime": "12:15"
+    },
+    {
+      "id": "S004",
+      "priority": "URGENT",
+      "type": "TISSUE",
+      "analysisTime": 50,
+      "arrivalTime": "12:30"
+    }
+  ],
+  "technicians": [
+    {
+      "id": "TECH001",
+      "specialty": ["BLOOD", "CHEMISTRY"],
+      "efficiency": 1.2,
+      "lunchBreak": "12:00-13:00"
+    },
+    {
+      "id": "TECH002",
+      "specialty": ["MICROBIOLOGY", "IMMUNOLOGY"],
+      "efficiency": 1.0,
+      "lunchBreak": "12:30-13:30"
+    }
+  ]
+}

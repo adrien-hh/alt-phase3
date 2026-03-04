@@ -1,0 +1,86 @@
+{
+  "schedule": [
+    {
+      "sampleId": "S002",
+      "priority": "URGENT",
+      "technicianId": "TECH001",
+      "equipmentId": "EQ002",
+      "startTime": "11:45",
+      "endTime": "12:14",
+      "duration": 29,
+      "efficiency": 1.2,
+      "status": "completed"
+    },
+    {
+      "sampleId": "S003",
+      "priority": "STAT",
+      "technicianId": "TECH001",
+      "equipmentId": "EQ001",
+      "startTime": "12:15",
+      "endTime": "12:48",
+      "duration": 33,
+      "efficiency": 1.2,
+      "status": "lunchInterrupted",
+      "lunchBreakRescheduled": "12:48-13:48",
+      "notes": "Pause déjeuner interrompue pour STAT"
+    },
+    {
+      "sampleId": "S001",
+      "priority": "ROUTINE",
+      "technicianId": "TECH002",
+      "equipmentId": "EQ003",
+      "startTime": "11:30",
+      "pauseTime": "12:30-13:30",
+      "resumeTime": "13:30",
+      "endTime": "14:00",
+      "duration": 60,
+      "efficiency": 1.0,
+      "status": "pausedForLunch"
+    },
+    {
+      "sampleId": "S004",
+      "priority": "URGENT",
+      "technicianId": "TECH002",
+      "equipmentId": "EQ003",
+      "startTime": "14:20",
+      "endTime": "15:10",
+      "duration": 50,
+      "efficiency": 1.0,
+      "status": "delayedByCleaning",
+      "cleaningTime": 20
+    }
+  ],
+  "metadata": {
+    "lunchBreaks": [
+      {
+        "technicianId": "TECH001",
+        "planned": "12:00-13:00",
+        "actual": "12:48-13:48",
+        "reason": "STAT interruption"
+      },
+      {
+        "technicianId": "TECH002",
+        "planned": "12:30-13:30",
+        "actual": "12:30-13:30",
+        "reason": "normal"
+      }
+    ],
+    "equipmentCleaning": [
+      {
+        "equipmentId": "EQ003",
+        "between": "S001-S004",
+        "duration": 20
+      }
+    ]
+  },
+  "metrics": {
+    "totalTime": 220,
+    "efficiency": 78.0,
+    "conflicts": 0,
+    "statResponseTime": 33,
+    "lunchInterruptions": 1,
+    "constraintViolations": 0,
+    "technicianUtilization": 72.5,
+    "priorityRespectRate": 100
+  }
+}

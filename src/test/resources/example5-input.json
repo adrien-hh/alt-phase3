@@ -1,0 +1,37 @@
+{
+  "samples": [
+    {
+      "id": "S001",
+      "priority": "ROUTINE",
+      "type": "BLOOD",
+      "analysisTime": 30,
+      "arrivalTime": "09:00"
+    },
+    {
+      "id": "S002",
+      "priority": "URGENT",
+      "type": "BLOOD",
+      "analysisTime": 45,
+      "arrivalTime": "09:05"
+    },
+    {
+      "id": "S003",
+      "priority": "STAT",
+      "type": "BLOOD",
+      "analysisTime": 20,
+      "arrivalTime": "09:20"
+    }
+  ],
+  "technicians": [
+    {
+      "id": "TECH001",
+      "specialty": ["BLOOD", "CHEMISTRY"],
+      "efficiency": 1.1
+    },
+    {
+      "id": "TECH002",
+      "specialty": ["CHEMISTRY", "IMMUNOLOGY"],
+      "efficiency": 1.0
+    }
+  ]
+}
