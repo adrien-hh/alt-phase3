@@ -52,7 +52,6 @@ public class MetricsCalculatorIntermediate {
         return Duration.between(earliestStart, latestEnd).toMinutes();
     }
 
-    // (Σ temps occupation par technicien) / nombre techniciens / temps total * 100
     private double computeEfficiency(
             List<TechnicianIntermediate> technicians,
             List<ScheduleEntryIntermediate> schedule,
@@ -63,15 +62,14 @@ public class MetricsCalculatorIntermediate {
         }
 
         double totalOccupied = technicians.stream()
-                .mapToLong(t -> schedule.stream()
-                        .filter(e -> e.getTechnicianId().equals(t.getId()))
+                .mapToLong(technician -> schedule.stream()
+                        .filter(scheduleEntry -> scheduleEntry.getTechnicianId().equals(technician.getId()))
                         .mapToLong(ScheduleEntryIntermediate::getDuration)
                         .sum())
                 .sum();
         return roundToOneDecimal(totalOccupied / technicians.size() / totalTime * 100);
     }
 
-    // temps actif de chaque technicien / durée de son shift * 100, moyenne sur tous
     private double computeTechnicianUtilization(
             List<TechnicianIntermediate> technicians,
             List<ScheduleEntryIntermediate> schedule
@@ -89,7 +87,6 @@ public class MetricsCalculatorIntermediate {
                 .orElse(0.0));
     }
 
-    // moyenne des (startTime - arrivalTime) par échantillon planifié
     private double computeAverageWaitTime(
             List<SampleIntermediate> samples,
             List<ScheduleEntryIntermediate> schedule
@@ -106,7 +103,6 @@ public class MetricsCalculatorIntermediate {
                 .orElse(0.0));
     }
 
-    // 100% si chaque STAT avant tout URGENT, chaque URGENT avant tout ROUTINE
     private int computePriorityRespectRate(List<ScheduleEntryIntermediate> schedule) {
         for (int i = 0; i < schedule.size(); i++) {
             for (int j = i + 1; j < schedule.size(); j++) {
@@ -122,7 +118,6 @@ public class MetricsCalculatorIntermediate {
         return 100;
     }
 
-    // nombre de créneaux où au moins 2 analyses sont en cours simultanément
     private int computeParallelEfficiency(List<ScheduleEntryIntermediate> schedule) {
         return (int) schedule.stream()
                 .filter(e1 -> schedule.stream()

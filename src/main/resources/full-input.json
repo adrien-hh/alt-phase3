@@ -9,7 +9,7 @@
       "id": "S001",
       "priority": "STAT",
       "type": "BLOOD",
-      "analysisType": "Numération complète",
+      "analysisType": "Numération",
       "analysisTime": 45,
       "arrivalTime": "08:30",
       "patientInfo": {
@@ -35,7 +35,7 @@
       "id": "S012",
       "priority": "STAT",
       "type": "BLOOD",
-      "analysisType": "Hémoculture urgente",
+      "analysisType": "Hémoculture",
       "analysisTime": 60,
       "arrivalTime": "10:45",
       "patientInfo": {
@@ -48,7 +48,7 @@
       "id": "S017",
       "priority": "STAT",
       "type": "BLOOD",
-      "analysisType": "Allergènes critiques",
+      "analysisType": "Allergènes",
       "analysisTime": 40,
       "arrivalTime": "13:20",
       "patientInfo": {
@@ -100,7 +100,7 @@
       "id": "S011",
       "priority": "URGENT",
       "type": "BLOOD",
-      "analysisType": "Caryotype urgent",
+      "analysisType": "Caryotype",
       "analysisTime": 90,
       "arrivalTime": "11:00",
       "patientInfo": {
@@ -113,7 +113,7 @@
       "id": "S014",
       "priority": "URGENT",
       "type": "BLOOD",
-      "analysisType": "Sérologie HIV",
+      "analysisType": "Sérologie",
       "analysisTime": 55,
       "arrivalTime": "11:45",
       "patientInfo": {
@@ -126,7 +126,7 @@
       "id": "S016",
       "priority": "URGENT",
       "type": "BLOOD",
-      "analysisType": "Frottis sanguin",
+      "analysisType": "Frottis",
       "analysisTime": 40,
       "arrivalTime": "12:30",
       "patientInfo": {
@@ -165,7 +165,7 @@
       "id": "S003",
       "priority": "ROUTINE",
       "type": "BLOOD",
-      "analysisType": "Bilan lipidique",
+      "analysisType": "Lipides",
       "analysisTime": 30,
       "arrivalTime": "09:00",
       "patientInfo": {
@@ -178,7 +178,7 @@
       "id": "S004",
       "priority": "ROUTINE",
       "type": "BLOOD",
-      "analysisType": "Hémogramme standard",
+      "analysisType": "Hémogramme",
       "analysisTime": 25,
       "arrivalTime": "09:15",
       "patientInfo": {
@@ -191,7 +191,7 @@
       "id": "S006",
       "priority": "ROUTINE",
       "type": "BLOOD",
-      "analysisType": "Vaccination contrôle",
+      "analysisType": "Vaccination",
       "analysisTime": 35,
       "arrivalTime": "10:00",
       "patientInfo": {
@@ -345,7 +345,7 @@
       "id": "EQ001",
       "name": "Analyseur Hématologie XN-3000",
       "type": "BLOOD",
-      "compatibleTypes": ["Hémogramme", "Numération", "Coagulation", "Frottis"],
+      "compatibleTypes": ["Hémogramme", "Numération", "Coagulation", "Frottis", "Vitesse sédimentation"],
       "capacity": 2,
       "maintenanceWindow": "06:00-07:00",
       "cleaningTime": 10

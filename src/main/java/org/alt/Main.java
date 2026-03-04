@@ -1,8 +1,11 @@
 package org.alt;
 
 import org.alt.bo.dto.LabInput;
+import org.alt.bo.dto.LabInputIntermediate;
 import org.alt.bo.dto.LabOutput;
+import org.alt.bo.dto.LabOutputIntermediate;
 import org.alt.service.LabPlanner;
+import org.alt.service.LabPlannerIntermediate;
 import org.alt.utils.JsonUtils;
 
 import java.io.IOException;
@@ -20,8 +23,8 @@ public class Main {
 
         String inputFile = args[0];
 
-        LabInput input = JsonUtils.read(inputFile, LabInput.class);
-        LabOutput output = new LabPlanner().planifyLab(input);
+        LabInputIntermediate input = JsonUtils.read(inputFile, LabInputIntermediate.class);
+        LabOutputIntermediate output = new LabPlannerIntermediate().planifyLab(input);
 
         JsonUtils.mapper()
                 .writerWithDefaultPrettyPrinter()
