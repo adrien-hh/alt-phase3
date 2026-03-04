@@ -270,74 +270,90 @@
     {
       "id": "TECH001",
       "name": "Dr. Marie Dubois",
-      "specialty": ["BLOOD", "CHEMISTRY"],
+      "specialty": [
+        "BLOOD",
+        "CHEMISTRY"
+      ],
       "efficiency": 1.2,
       "startTime": "07:30",
-      "endTime": "16:30",
-      "lunchBreak": "12:30-13:30"
+      "endTime": "16:30"
     },
     {
       "id": "TECH002",
       "name": "Jean-Pierre Martin",
-      "specialty": ["MICROBIOLOGY", "IMMUNOLOGY"],
+      "specialty": [
+        "MICROBIOLOGY",
+        "IMMUNOLOGY"
+      ],
       "efficiency": 1.1,
       "startTime": "08:00",
-      "endTime": "17:00",
-      "lunchBreak": "13:00-14:00"
+      "endTime": "17:00"
     },
     {
       "id": "TECH003",
       "name": "Sophie Bernard",
-      "specialty": ["CHEMISTRY", "IMMUNOLOGY"],
+      "specialty": [
+        "CHEMISTRY",
+        "IMMUNOLOGY"
+      ],
       "efficiency": 1.0,
       "startTime": "08:00",
-      "endTime": "17:00",
-      "lunchBreak": "12:00-13:00"
+      "endTime": "17:00"
     },
     {
       "id": "TECH004",
       "name": "Lucas Petit",
-      "specialty": ["BLOOD", "GENETICS"],
+      "specialty": [
+        "BLOOD",
+        "GENETICS"
+      ],
       "efficiency": 0.95,
       "startTime": "09:00",
-      "endTime": "18:00",
-      "lunchBreak": "13:00-14:00"
+      "endTime": "18:00"
     },
     {
       "id": "TECH005",
       "name": "Emma Rousseau",
-      "specialty": ["MICROBIOLOGY"],
+      "specialty": [
+        "MICROBIOLOGY"
+      ],
       "efficiency": 1.0,
       "startTime": "07:00",
-      "endTime": "16:00",
-      "lunchBreak": "12:30-13:30"
+      "endTime": "16:00"
     },
     {
       "id": "TECH006",
       "name": "Thomas Moreau",
-      "specialty": ["GENETICS", "IMMUNOLOGY"],
+      "specialty": [
+        "GENETICS",
+        "IMMUNOLOGY"
+      ],
       "efficiency": 0.9,
       "startTime": "09:30",
-      "endTime": "18:30",
-      "lunchBreak": "13:30-14:30"
+      "endTime": "18:30"
     },
     {
       "id": "TECH007",
       "name": "Camille Leroy",
-      "specialty": ["CHEMISTRY", "BLOOD", "IMMUNOLOGY"],
+      "specialty": [
+        "CHEMISTRY",
+        "BLOOD",
+        "IMMUNOLOGY"
+      ],
       "efficiency": 1.05,
       "startTime": "08:30",
-      "endTime": "17:30",
-      "lunchBreak": "12:00-13:00"
+      "endTime": "17:30"
     },
     {
       "id": "TECH008",
       "name": "Antoine Garnier",
-      "specialty": ["BLOOD", "MICROBIOLOGY"],
+      "specialty": [
+        "BLOOD",
+        "MICROBIOLOGY"
+      ],
       "efficiency": 0.85,
       "startTime": "10:00",
-      "endTime": "19:00",
-      "lunchBreak": "14:00-15:00"
+      "endTime": "19:00"
     }
   ],
   "equipment": [
@@ -345,7 +361,13 @@
       "id": "EQ001",
       "name": "Analyseur Hématologie XN-3000",
       "type": "BLOOD",
-      "compatibleTypes": ["Hémogramme", "Numération", "Coagulation", "Frottis", "Vitesse sédimentation"],
+      "compatibleTypes": [
+        "Hémogramme",
+        "Numération",
+        "Coagulation",
+        "Frottis",
+        "Vitesse sédimentation"
+      ],
       "capacity": 2,
       "maintenanceWindow": "06:00-07:00",
       "cleaningTime": 10
@@ -354,7 +376,13 @@
       "id": "EQ002",
       "name": "Automate Biochimie Cobas 8000",
       "type": "CHEMISTRY",
-      "compatibleTypes": ["Bilan hépatique", "Lipides", "Électrolytes", "Troponine", "HbA1c"],
+      "compatibleTypes": [
+        "Bilan hépatique",
+        "Lipides",
+        "Électrolytes",
+        "Troponine",
+        "HbA1c"
+      ],
       "capacity": 3,
       "maintenanceWindow": "06:30-07:30",
       "cleaningTime": 15
@@ -363,7 +391,12 @@
       "id": "EQ003",
       "name": "Station Microbiologie Vitek MS",
       "type": "MICROBIOLOGY",
-      "compatibleTypes": ["ECBU", "Hémoculture", "Parasitologie", "Prélèvement gorge"],
+      "compatibleTypes": [
+        "ECBU",
+        "Hémoculture",
+        "Parasitologie",
+        "Prélèvement gorge"
+      ],
       "capacity": 2,
       "maintenanceWindow": "07:00-08:00",
       "cleaningTime": 20
@@ -372,7 +405,12 @@
       "id": "EQ004",
       "name": "Système Immunologie Liaison XL",
       "type": "IMMUNOLOGY",
-      "compatibleTypes": ["Sérologie", "Allergènes", "Vaccination", "Titre anticorps"],
+      "compatibleTypes": [
+        "Sérologie",
+        "Allergènes",
+        "Vaccination",
+        "Titre anticorps"
+      ],
       "capacity": 2,
       "maintenanceWindow": "05:30-06:30",
       "cleaningTime": 12
@@ -381,7 +419,11 @@
       "id": "EQ005",
       "name": "Séquenceur Génétique NextSeq",
       "type": "GENETICS",
-      "compatibleTypes": ["Caryotype", "Conseil génétique", "Pharmacogénétique"],
+      "compatibleTypes": [
+        "Caryotype",
+        "Conseil génétique",
+        "Pharmacogénétique"
+      ],
       "capacity": 1,
       "maintenanceWindow": "19:00-20:00",
       "cleaningTime": 30
@@ -389,7 +431,11 @@
   ],
   "constraints": {
     "maxProcessingTime": 720,
-    "priorityRules": ["STAT", "URGENT", "ROUTINE"],
+    "priorityRules": [
+      "STAT",
+      "URGENT",
+      "ROUTINE"
+    ],
     "contaminationPrevention": true,
     "parallelProcessing": true
   }
