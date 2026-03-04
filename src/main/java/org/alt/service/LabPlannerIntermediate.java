@@ -4,14 +4,15 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.alt.bo.common.AssignmentIntermediate;
+import org.alt.bo.common.LunchState;
 import org.alt.bo.dto.LabInputIntermediate;
 import org.alt.bo.dto.LabOutputIntermediate;
 import org.alt.bo.input.intermediate.EquipmentIntermediate;
-import org.alt.service.intermediate.MetricsCalculatorIntermediate;
 import org.alt.bo.input.intermediate.SampleIntermediate;
 import org.alt.bo.input.intermediate.TechnicianIntermediate;
 import org.alt.bo.output.MetricsIntermediate;
 import org.alt.bo.output.ScheduleEntryIntermediate;
+import org.alt.service.intermediate.MetricsCalculatorIntermediate;
 import org.alt.service.intermediate.ResourceAssignerIntermediate;
 
 import java.time.LocalTime;
@@ -67,31 +68,54 @@ public class LabPlannerIntermediate {
         Map<String, LocalTime> equipmentFreeAt = equipments.stream()
                 .collect(Collectors.toMap(EquipmentIntermediate::getId, e -> LocalTime.MIN));
 
+        Map<String, LunchState> lunchStates = technicians.stream()
+                .collect(Collectors.toMap(
+                        TechnicianIntermediate::getId,
+                        t -> LunchState.notTaken()
+                ));
+
         for (SampleIntermediate sample : samples) {
 
             AssignmentIntermediate bestAssignment = resourceAssigner.findBestAssignment(
-                    sample, technicians, equipments, technicianFreeAt, equipmentFreeAt);
+                    sample, technicians, equipments, technicianFreeAt, equipmentFreeAt, lunchStates);
 
             if (bestAssignment == null) {
                 conflicts++;
+                System.out.println("No assignment found for: " + sample.getId());
                 continue;
             }
 
-            // durée ajustée par le coefficient d'efficacité
+            // if start in window and break not taken → plan lunch break
+            String techId = bestAssignment.technician().getId();
+            LunchState lunch = lunchStates.get(techId);
+            if (!lunch.taken() && LunchState.isInLunchWindow(bestAssignment.start())) {
+                lunchStates.put(techId, LunchState.schedule(bestAssignment.start()));
+            }
+
             long duration = Math.round(sample.getAnalysisTime() / bestAssignment.technician().getEfficiency());
             LocalTime end = bestAssignment.start().plusMinutes(duration);
 
-            // shift check
             if (end.isAfter(bestAssignment.technician().getEndTime())) {
                 conflicts++;
+                System.out.println("Shift overflow for: " + sample.getId() +
+                        " end=" + end + " techEnd=" + bestAssignment.technician().getEndTime());
                 continue;
             }
 
             schedule.add(toEntry(sample, bestAssignment.technician(), bestAssignment.equipment(), bestAssignment.start(), end, duration));
 
-            technicianFreeAt.put(bestAssignment.technician().getId(), end);
-            // équipement libre après analyse + nettoyage
-            equipmentFreeAt.put(bestAssignment.equipment().getId(), end.plusMinutes(bestAssignment.equipment().getCleaningTime()));
+            // Technician update : if end in window and break not taken -> break after
+            lunch = lunchStates.get(techId);
+            if (!lunch.taken() && LunchState.isInLunchWindow(end)) {
+                LunchState scheduled = LunchState.schedule(end);
+                lunchStates.put(techId, scheduled);
+                technicianFreeAt.put(techId, scheduled.end());
+            } else {
+                technicianFreeAt.put(techId, end);
+            }
+
+            equipmentFreeAt.put(bestAssignment.equipment().getId(),
+                    end.plusMinutes(bestAssignment.equipment().getCleaningTime()));
         }
 
         return new BuiltSchedule(schedule, conflicts);
