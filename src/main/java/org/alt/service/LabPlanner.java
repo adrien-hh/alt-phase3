@@ -122,15 +122,15 @@ public class LabPlanner {
     }
 
     private Metrics computeMetrics(LabInput input, List<ScheduleEntry> schedule, int conflicts) {
-        long totalTime = computeTotalTime(input, schedule);
+        long totalTime = computeTotalTime(schedule);
         int totalAnalysis = input.getSamples().stream().mapToInt(Sample::getAnalysisTime).sum();
         double efficiency = totalTime == 0 ? 0.0 : roundToOneDecimal(100.0 * totalAnalysis / totalTime);
         return new Metrics(totalTime, efficiency, conflicts);
     }
 
-    private long computeTotalTime(LabInput input, List<ScheduleEntry> schedule) {
-        LocalTime earliestArrival = input.getSamples().stream()
-                .map(Sample::getArrivalTime)
+    private long computeTotalTime(List<ScheduleEntry> schedule) {
+        LocalTime earliestStart = schedule.stream()
+                .map(ScheduleEntry::getStartTime)
                 .min(LocalTime::compareTo)
                 .orElse(null);
 
@@ -139,8 +139,10 @@ public class LabPlanner {
                 .max(LocalTime::compareTo)
                 .orElse(null);
 
-        if (earliestArrival == null || latestEnd == null) return 0;
-        return minutesBetween(earliestArrival, latestEnd);
+        if (earliestStart == null) {
+            return 0;
+        }
+        return minutesBetween(earliestStart, latestEnd);
     }
 
     private double roundToOneDecimal(double value) {
