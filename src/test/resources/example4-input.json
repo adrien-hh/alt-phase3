@@ -4,7 +4,7 @@
       "id": "S001",
       "priority": "ROUTINE",
       "type": "BLOOD",
-      "analysisType": "Bilan lipidique",
+      "analysisType": "Lipides",
       "analysisTime": 30,
       "arrivalTime": "09:00"
     },
@@ -12,7 +12,7 @@
       "id": "S002",
       "priority": "URGENT",
       "type": "BLOOD",
-      "analysisType": "Numération complète",
+      "analysisType": "Numération",
       "analysisTime": 45,
       "arrivalTime": "09:15"
     }
@@ -31,12 +31,14 @@
     {
       "id": "EQ001",
       "type": "BLOOD",
+      "compatibleTypes": ["Hémogramme", "Numération", "Coagulation", "Frottis"],
       "capacity": 1,
       "cleaningTime": 10
     },
     {
       "id": "EQ002",
       "type": "CHEMISTRY",
+      "compatibleTypes": ["Bilan hépatique", "Lipides", "Électrolytes", "Troponine", "HbA1c"],
       "capacity": 1,
       "cleaningTime": 15
     }

@@ -4,6 +4,7 @@
       "id": "S001",
       "priority": "ROUTINE",
       "type": "BLOOD",
+      "analysisType": "Lipides",
       "analysisTime": 30,
       "arrivalTime": "09:00"
     },
@@ -11,6 +12,7 @@
       "id": "S002",
       "priority": "URGENT",
       "type": "BLOOD",
+      "analysisType": "Hémogramme",
       "analysisTime": 45,
       "arrivalTime": "09:05"
     },
@@ -18,6 +20,7 @@
       "id": "S003",
       "priority": "STAT",
       "type": "BLOOD",
+      "analysisType": "Bilan hépatique",
       "analysisTime": 20,
       "arrivalTime": "09:20"
     }
@@ -25,13 +28,37 @@
   "technicians": [
     {
       "id": "TECH001",
+      "name": "Dr. Marie Dubois",
       "specialty": ["BLOOD", "CHEMISTRY"],
-      "efficiency": 1.1
+      "efficiency": 1.1,
+      "startTime": "07:30",
+      "endTime": "16:30",
+      "lunchBreak": "12:30-13:30"
     },
     {
       "id": "TECH002",
+      "name": "Jean-Pierre Martin",
       "specialty": ["CHEMISTRY", "IMMUNOLOGY"],
-      "efficiency": 1.0
+      "efficiency": 1.0,
+      "startTime": "08:00",
+      "endTime": "17:00",
+      "lunchBreak": "13:00-14:00"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "EQ001",
+      "type": "BLOOD",
+      "compatibleTypes": ["Hémogramme", "Numération", "Coagulation", "Frottis"],
+      "capacity": 1,
+      "cleaningTime": 10
+    },
+    {
+      "id": "EQ002",
+      "type": "CHEMISTRY",
+      "compatibleTypes": ["Bilan hépatique", "Lipides", "Électrolytes", "Troponine", "HbA1c"],
+      "capacity": 1,
+      "cleaningTime": 15
     }
   ]
 }

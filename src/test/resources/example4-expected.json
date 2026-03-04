@@ -8,7 +8,7 @@
       "startTime": "09:15",
       "endTime": "10:00",
       "duration": 45,
-      "analysisType": "Numération complète",
+      "analysisType": "Numération",
       "efficiency": 1.0
     },
     {
@@ -19,16 +19,16 @@
       "startTime": "10:00",
       "endTime": "10:30",
       "duration": 30,
-      "analysisType": "Bilan lipidique",
+      "analysisType": "Lipides",
       "efficiency": 1.0
     }
   ],
   "metrics": {
     "totalTime": 75,
-    "efficiency": 85.0,
+    "efficiency": 100.0,
     "conflicts": 0,
-    "averageWaitTime": 22.5,
-    "technicianUtilization": 41.7,
+    "averageWaitTime": 30.0,
+    "technicianUtilization": 13.9,
     "priorityRespectRate": 100,
     "parallelEfficiency": 0
   }

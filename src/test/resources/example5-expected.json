@@ -1,44 +1,49 @@
 {
   "schedule": [
     {
-      "sampleId": "S002",
-      "priority": "URGENT",
-      "technicianId": "TECH001",
-      "equipmentId": "EQ001",
-      "startTime": "09:05",
-      "endTime": "09:46",
-      "duration": 41,
-      "efficiency": 1.1
-    },
-    {
       "sampleId": "S003",
-      "priority": "STAT",
-      "technicianId": "TECH002",
+      "technicianId": "TECH001",
       "equipmentId": "EQ002",
       "startTime": "09:20",
       "endTime": "09:38",
-      "duration": 20,
-      "efficiency": 1.0
+      "priority": "STAT",
+      "duration": 18,
+      "analysisType": "Bilan hépatique",
+      "efficiency": 1.1,
+      "cleaningDelay": 0
+    },
+    {
+      "sampleId": "S002",
+      "technicianId": "TECH001",
+      "equipmentId": "EQ001",
+      "startTime": "09:38",
+      "endTime": "10:19",
+      "priority": "URGENT",
+      "duration": 41,
+      "analysisType": "Hémogramme",
+      "efficiency": 1.1,
+      "cleaningDelay": 0
     },
     {
       "sampleId": "S001",
-      "priority": "ROUTINE",
       "technicianId": "TECH002",
       "equipmentId": "EQ002",
       "startTime": "09:53",
       "endTime": "10:23",
+      "priority": "ROUTINE",
       "duration": 30,
+      "analysisType": "Lipides",
       "efficiency": 1.0,
-      "cleaningDelay": 15
+      "cleaningDelay": 0
     }
   ],
   "metrics": {
-    "totalTime": 78,
-    "efficiency": 88.5,
+    "totalTime": 63,
+    "efficiency": 70.6,
     "conflicts": 0,
-    "statResponseTime": 18,
-    "parallelAnalyses": 2,
+    "averageWaitTime": 28.7,
+    "technicianUtilization": 8.2,
     "priorityRespectRate": 100,
-    "technicianUtilization": 65.4
+    "parallelEfficiency": 2
   }
 }
