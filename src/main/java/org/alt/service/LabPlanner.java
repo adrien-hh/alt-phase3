@@ -1,5 +1,9 @@
 package org.alt.service;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.alt.bo.common.Assignment;
 import org.alt.bo.dto.LabInput;
 import org.alt.bo.dto.LabOutput;
 import org.alt.bo.input.simple.Equipment;
@@ -8,19 +12,29 @@ import org.alt.bo.input.simple.Technician;
 import org.alt.bo.output.Metrics;
 import org.alt.bo.output.ScheduleEntry;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class LabPlanner {
+
+    private final SampleSorter sampleSorter;
+    private final ResourceAssigner resourceAssigner;
+    private final MetricsCalculator metricsCalculator;
+
+    public LabPlanner() {
+        this.sampleSorter = new SampleSorter();
+        this.resourceAssigner = new ResourceAssigner();
+        this.metricsCalculator = new MetricsCalculator();
+    }
+
     public LabOutput planifyLab(LabInput input) {
-        List<Sample> samples = sortByPriorityThenArrival(input.getSamples());
+        List<Sample> samples = sampleSorter.sortByPriorityThenArrival(input.getSamples());
 
         List<Technician> technicians = input.getTechnicians();
         List<Equipment> equipments = input.getEquipments();
@@ -31,7 +45,7 @@ public class LabPlanner {
 
         BuiltSchedule builtSchedule = buildSchedule(samples, technicians, equipments);
 
-        Metrics metrics = computeMetrics(input, builtSchedule.scheduleEntries(), builtSchedule.conflicts());
+        Metrics metrics = metricsCalculator.computeMetrics(input, builtSchedule.scheduleEntries(), builtSchedule.conflicts());
 
         return new LabOutput(builtSchedule.scheduleEntries(), metrics);
     }
@@ -47,7 +61,7 @@ public class LabPlanner {
 
         for (Sample sample : samples) {
 
-            Assignment bestAssignment = findBestAssignment(sample, technicians, equipments, technicianFreeAt, equipmentFreeAt);
+            Assignment bestAssignment = resourceAssigner.findBestAssignment(sample, technicians, equipments, technicianFreeAt, equipmentFreeAt);
 
             if (bestAssignment == null) {
                 conflicts++;
@@ -82,95 +96,6 @@ public class LabPlanner {
                 .build();
     }
 
-    private Assignment findBestAssignment(
-            Sample sample,
-            List<Technician> technicians,
-            List<Equipment> equipments,
-            Map<String, LocalTime> technicianFreeAt,
-            Map<String, LocalTime> equipmentFreeAt
-    ) {
-        Assignment best = null;
-
-        for (Technician t : technicians) {
-            if (!isTechCompatible(t, sample)) continue;
-
-            for (Equipment e : equipments) {
-                if (!isEquipCompatible(e, sample)) continue;
-
-                LocalTime start = maxStartTime(
-                        sample.getArrivalTime(),
-                        t.getStartTime(),
-                        technicianFreeAt.get(t.getId()),
-                        equipmentFreeAt.get(e.getId())
-                );
-
-                if (best == null || start.isBefore(best.start())) {
-                    best = new Assignment(t, e, start);
-                }
-            }
-        }
-        return best;
-    }
-
-    private boolean isEquipCompatible(Equipment equipment, Sample sample) {
-        return equipment.isAvailable() && equipment.getType() == sample.getType();
-    }
-
-    private boolean isTechCompatible(Technician technician, Sample sample) {
-        return technician.getSpeciality().supports(sample.getType());
-    }
-
-    private Metrics computeMetrics(LabInput input, List<ScheduleEntry> schedule, int conflicts) {
-        long totalTime = computeTotalTime(schedule);
-        int totalAnalysis = input.getSamples().stream().mapToInt(Sample::getAnalysisTime).sum();
-        double efficiency = totalTime == 0 ? 0.0 : roundToOneDecimal(100.0 * totalAnalysis / totalTime);
-        return new Metrics(totalTime, efficiency, conflicts);
-    }
-
-    private long computeTotalTime(List<ScheduleEntry> schedule) {
-        LocalTime earliestStart = schedule.stream()
-                .map(ScheduleEntry::getStartTime)
-                .min(LocalTime::compareTo)
-                .orElse(null);
-
-        LocalTime latestEnd = schedule.stream()
-                .map(ScheduleEntry::getEndTime)
-                .max(LocalTime::compareTo)
-                .orElse(null);
-
-        if (earliestStart == null) {
-            return 0;
-        }
-        return minutesBetween(earliestStart, latestEnd);
-    }
-
-    private double roundToOneDecimal(double value) {
-        return BigDecimal.valueOf(value).setScale(1, RoundingMode.HALF_UP).doubleValue();
-    }
-
-    private long minutesBetween(LocalTime startTime, LocalTime endTime) {
-        return Duration.between(startTime, endTime).toMinutes();
-    }
-
-    private List<Sample> sortByPriorityThenArrival(List<Sample> samples) {
-        samples.sort(
-                Comparator.comparingInt((Sample s) -> s.getPriority().ordinal()) // STAT → URGENT → ROUTINE
-                        .thenComparing(Sample::getArrivalTime) // then chronological order
-        );
-        return samples;
-    }
-
-    private LocalTime maxStartTime(LocalTime... times) {
-        LocalTime max = times[0];
-        for (int i = 1; i < times.length; i++) {
-            if (times[i].isAfter(max)) max = times[i];
-        }
-        return max;
-    }
-
     private record BuiltSchedule(List<ScheduleEntry> scheduleEntries, int conflicts) {
-    }
-
-    private record Assignment(Technician technician, Equipment equipment, LocalTime start) {
     }
 }
