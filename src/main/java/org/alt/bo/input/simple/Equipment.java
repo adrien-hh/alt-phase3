@@ -1,9 +1,9 @@
-package org.alt.bo.input;
+package org.alt.bo.input.simple;
 
 import lombok.*;
+import org.alt.bo.input.Type;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -12,5 +12,5 @@ public class Equipment {
     private String id;
     private String name;
     private Type type;
-    private boolean available;
+    private boolean available = true;
 }

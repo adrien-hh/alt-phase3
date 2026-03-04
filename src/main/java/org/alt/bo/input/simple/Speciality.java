@@ -1,4 +1,6 @@
-package org.alt.bo.input;
+package org.alt.bo.input.simple;
+
+import org.alt.bo.input.Type;
 
 public enum Speciality {
     BLOOD,

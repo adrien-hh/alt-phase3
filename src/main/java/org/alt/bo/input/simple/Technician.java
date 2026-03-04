@@ -1,11 +1,10 @@
-package org.alt.bo.input;
+package org.alt.bo.input.simple;
 
 import lombok.*;
 
 import java.time.LocalTime;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")

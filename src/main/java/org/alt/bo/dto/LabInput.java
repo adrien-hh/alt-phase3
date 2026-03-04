@@ -1,9 +1,9 @@
 package org.alt.bo.dto;
 
 import lombok.*;
-import org.alt.bo.input.Equipment;
-import org.alt.bo.input.Sample;
-import org.alt.bo.input.Technician;
+import org.alt.bo.input.simple.Equipment;
+import org.alt.bo.input.simple.Sample;
+import org.alt.bo.input.simple.Technician;
 
 import java.util.ArrayList;
 import java.util.List;

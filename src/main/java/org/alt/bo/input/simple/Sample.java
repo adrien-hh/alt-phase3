@@ -1,6 +1,8 @@
-package org.alt.bo.input;
+package org.alt.bo.input.simple;
 
 import lombok.*;
+import org.alt.bo.input.Priority;
+import org.alt.bo.input.Type;
 
 import java.time.LocalTime;
 
@@ -14,7 +16,7 @@ public class Sample {
     private String id;
     private Type type;
     private Priority priority;
-    private int analysisTime;   // duration in minutes
+    private int analysisTime;
     private LocalTime arrivalTime;
     private String patientId;
 }

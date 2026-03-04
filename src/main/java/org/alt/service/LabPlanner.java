@@ -2,10 +2,9 @@ package org.alt.service;
 
 import org.alt.bo.dto.LabInput;
 import org.alt.bo.dto.LabOutput;
-import org.alt.bo.input.Equipment;
-import org.alt.bo.input.Sample;
-import org.alt.bo.input.Speciality;
-import org.alt.bo.input.Technician;
+import org.alt.bo.input.simple.Equipment;
+import org.alt.bo.input.simple.Sample;
+import org.alt.bo.input.simple.Technician;
 import org.alt.bo.output.Metrics;
 import org.alt.bo.output.ScheduleEntry;
 
