@@ -11,6 +11,8 @@ import org.alt.bo.input.simple.Sample;
 import org.alt.bo.input.simple.Technician;
 import org.alt.bo.output.Metrics;
 import org.alt.bo.output.ScheduleEntry;
+import org.alt.service.simple.MetricsCalculator;
+import org.alt.service.simple.ResourceAssigner;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

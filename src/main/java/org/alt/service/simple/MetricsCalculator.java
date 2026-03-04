@@ -1,4 +1,4 @@
-package org.alt.service;
+package org.alt.service.simple;
 
 import org.alt.bo.dto.LabInput;
 import org.alt.bo.input.simple.Sample;

@@ -1,4 +1,4 @@
-package org.alt.service;
+package org.alt.service.simple;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

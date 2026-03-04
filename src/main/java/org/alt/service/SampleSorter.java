@@ -7,9 +7,9 @@ import java.util.List;
 
 public class SampleSorter {
 
-    public List<Sample> sortByPriorityThenArrival(List<Sample> samples) {
+    public <T extends Sample> List<T> sortByPriorityThenArrival(List<T> samples) {
         samples.sort(
-                Comparator.comparingInt((Sample s) -> s.getPriority().ordinal()) // STAT → URGENT → ROUTINE
+                Comparator.comparingInt((T sample) -> sample.getPriority().ordinal()) // STAT → URGENT → ROUTINE
                         .thenComparing(Sample::getArrivalTime) // then chronological order
         );
         return samples;

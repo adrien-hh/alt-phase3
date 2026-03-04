@@ -1,5 +1,6 @@
 package org.alt.bo.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.*;
 import org.alt.bo.input.simple.Equipment;
 import org.alt.bo.input.simple.Sample;
@@ -17,5 +18,6 @@ import java.util.List;
 public class LabInput {
     private List<Sample> samples = new ArrayList<>();
     private List<Technician> technicians = new ArrayList<>();
+    @JsonAlias("equipment")
     private List<Equipment> equipments = new ArrayList<>();
 }
