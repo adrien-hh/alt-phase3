@@ -1,10 +1,9 @@
 package org.alt.bo.dto;
 
+import java.util.List;
 import lombok.*;
 import org.alt.bo.output.MetricsIntermediate;
 import org.alt.bo.output.ScheduleEntryIntermediate;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +12,6 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 public class LabOutputIntermediate {
-    private List<ScheduleEntryIntermediate> schedule;
-    private MetricsIntermediate metrics;
+  private List<ScheduleEntryIntermediate> schedule;
+  private MetricsIntermediate metrics;
 }

@@ -1,10 +1,9 @@
 package org.alt.bo.dto;
 
+import java.util.List;
 import lombok.*;
 import org.alt.bo.output.Metrics;
 import org.alt.bo.output.ScheduleEntry;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +12,6 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 public class LabOutput {
-    private List<ScheduleEntry> schedule;
-    private Metrics metrics;
+  private List<ScheduleEntry> schedule;
+  private Metrics metrics;
 }

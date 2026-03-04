@@ -11,9 +11,8 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class ScheduleEntryIntermediate extends ScheduleEntry {
-    private int duration;
-    private String analysisType;
-    private double efficiency;
-    private int cleaningDelay;
+  private int duration;
+  private String analysisType;
+  private double efficiency;
+  private int cleaningDelay;
 }
-

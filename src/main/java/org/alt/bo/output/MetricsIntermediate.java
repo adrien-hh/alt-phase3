@@ -11,9 +11,9 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class MetricsIntermediate extends Metrics {
-    private double averageWaitTime;
-    private double technicianUtilization;
-    private int priorityRespectRate;
-    private int parallelEfficiency;
-    private int statResponseTime;
+  private double averageWaitTime;
+  private double technicianUtilization;
+  private int priorityRespectRate;
+  private int parallelEfficiency;
+  private int statResponseTime;
 }

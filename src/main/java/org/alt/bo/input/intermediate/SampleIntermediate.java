@@ -10,6 +10,6 @@ import org.alt.bo.input.simple.Sample;
 @EqualsAndHashCode(callSuper = true)
 @ToString
 public class SampleIntermediate extends Sample {
-    private String analysisType;
-    private PatientInfo patientInfo;
+  private String analysisType;
+  private PatientInfo patientInfo;
 }
